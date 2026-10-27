@@ -1,0 +1,8 @@
+{
+  "name": "Jardineiro em Ribeirão Preto",
+  "description": "Site profissional de captação de leads para serviços de jardinagem, corte de grama, limpeza de terrenos e podas em Ribeirão Preto e região.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
