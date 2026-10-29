@@ -1,0 +1,29 @@
+COMO CONECTAR O SITE À SUA PLANILHA GOOGLE:
+
+1. Acesse o Google Drive (https://drive.google.com) e crie uma nova Planilha Google.
+   Nomeie como: "Leads - Jardineiro Ribeirão Preto".
+
+2. No menu da planilha, clique em:
+   Extensões -> Apps Script.
+
+3. Apague o código que aparecer lá e cole todo o código que está no arquivo:
+   apps-script/Codigo.gs
+
+4. No canto superior direito da tela do Apps Script, clique no botão azul "Implantar" e depois em "Nova implantação".
+
+5. Ao lado de "Selecione o tipo", clique no ícone de engrenagem e escolha "App da Web".
+
+6. Preencha os campos exatamente assim:
+   - Descrição: Webhook de Leads
+   - Executar como: Eu (seu e-mail)
+   - Quem pode acessar: Qualquer pessoa  <--- (IMPORTANTE: marque 'Qualquer pessoa')
+
+7. Clique em "Implantar" e autorize as permissões da sua conta Google.
+
+8. O Google vai te dar uma "URL do app da Web" que termina com /exec.
+   Exemplo: https://script.google.com/macros/s/AKfycbx.../exec
+
+9. Abra o arquivo assets/js/main.js do site e cole essa URL na primeira linha:
+   const GOOGLE_SHEETS_WEBHOOK_URL = 'SUA_URL_AQUI';
+
+Pronto! A partir desse momento, cada clique nos botões "WhatsApp" e "Ligue agora" em qualquer página do site criará automaticamente uma nova linha na sua planilha com Data, Hora, Botão clicado, Página e Dispositivo.

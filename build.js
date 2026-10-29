@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const raiz = path.dirname(fileURLToPath(import.meta.url));
 const dist = path.join(raiz, 'dist');
 const ignorar = new Set(['node_modules', 'dist', '.git', '.aistudio', 'src', 'public', 'apps-script',
-  'package.json', 'package-lock.json', 'build.js', 'vite.config.ts', 'tsconfig.json', 'metadata.json',
+  'package.json', 'package-lock.json', 'build.js', 'server.js', 'vite.config.ts', 'tsconfig.json', 'metadata.json',
   'LEIA-ME.txt', 'vercel.json', '.gitignore', '.env', '.env.example']);
 
 function copiar(origem, destino) {
