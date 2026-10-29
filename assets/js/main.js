@@ -1,78 +1,90 @@
 /**
  * =========================================================================================
- * Jardineiro em Ribeirão Preto - Lógica Principal e Registro de Leads na Planilha
+ * Jardineiro em Ribeirão Preto - Registro Automático de Leads na Planilha Google
  * =========================================================================================
- *
- * Para conectar com sua Planilha Google:
- * 1. Siga o passo a passo em: apps-script/LEIA-ME.txt
- * 2. Cole a URL da sua implantação web do Apps Script na constante abaixo:
  */
-const GOOGLE_SHEETS_WEBHOOK_URL = ''; // Cole aqui a URL terminada em /exec (ex: 'https://script.google.com/macros/s/.../exec')
+
+// Webhook central do Google Apps Script configurado para a planilha do usuário
+const GOOGLE_SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzNOf1W0H8qo7UEY0AGEyLIF3ksLYgj2YELKy9OytgORZ_3Zs6PmRGl_a2p9w-myqdnlg/exec';
+const SITE_NAME = 'Jardineiro em Ribeirão Preto';
+const SITE_CITY = 'Ribeirão Preto';
+const WHATSAPP_NUMBER = '5516999999999';
 
 /**
- * Função para enviar o registro de clique para a Planilha Google
+ * Envia o registro do clique (WhatsApp ou Ligação) para a Planilha Google
  */
 function registrarClique(tipo, botaoNome) {
   const agora = new Date();
   const dataHora = agora.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
   const isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-  const payload = {
+  const dados = {
+    site: SITE_NAME,
+    cidade: SITE_CITY,
+    servico: SITE_NAME,
+    dominio: window.location.origin || 'https://www.jardineiroribeiraopreto.com.br',
     tipo: tipo, // 'WhatsApp' ou 'Ligação'
+    acao: tipo === 'WhatsApp' ? 'clique_whatsapp' : 'clique_ligacao',
+    canal: tipo.toLowerCase(),
     botao: botaoNome || ('Botão ' + tipo),
     pagina: window.location.pathname || '/',
+    data: dataHora,
     data_hora: dataHora,
     dispositivo: isMobile ? 'Celular' : 'Computador',
+    url: window.location.href,
+    referrer: document.referrer || 'Direto',
     user_agent: navigator.userAgent
   };
 
-  // 1. Armazena no localStorage do navegador para consulta ou histórico local
+  // 1. Armazena no localStorage do navegador para histórico local
   try {
     const historico = JSON.parse(localStorage.getItem('registro_cliques_leads') || '[]');
-    historico.push(payload);
+    historico.push(dados);
     if (historico.length > 50) historico.shift();
     localStorage.setItem('registro_cliques_leads', JSON.stringify(historico));
   } catch (err) {}
 
-  // 2. Envio local (útil quando executando o servidor de teste)
+  // 2. Envio local (quando executando o servidor de teste)
   try {
     fetch('/api/registrar-clique', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(dados),
       keepalive: true
     }).catch(() => {});
   } catch (err) {}
 
-  // 3. Envio para a Planilha Google via Apps Script Web App
-  if (GOOGLE_SHEETS_WEBHOOK_URL && GOOGLE_SHEETS_WEBHOOK_URL.startsWith('http')) {
-    const jsonStr = JSON.stringify(payload);
-    let beaconEnviado = false;
+  // 3. Envio para a Planilha Google no formato form-urlencoded esperado pelo Apps Script
+  try {
+    const params = new URLSearchParams(dados);
+    const bodyStr = params.toString();
+    let enviado = false;
 
-    // Utiliza sendBeacon quando suportado para máxima confiabilidade
     if (navigator.sendBeacon) {
       try {
-        const blob = new Blob([jsonStr], { type: 'text/plain;charset=UTF-8' });
-        beaconEnviado = navigator.sendBeacon(GOOGLE_SHEETS_WEBHOOK_URL, blob);
+        const blob = new Blob([bodyStr], { type: 'application/x-www-form-urlencoded;charset=UTF-8' });
+        enviado = navigator.sendBeacon(GOOGLE_SHEETS_WEBHOOK_URL, blob);
       } catch (e) {
-        beaconEnviado = false;
+        enviado = false;
       }
     }
 
-    if (!beaconEnviado) {
+    if (!enviado) {
       fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
-        body: jsonStr,
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: bodyStr,
         keepalive: true
       }).catch(err => {
-        console.warn('Registro de clique enviado em background.');
+        console.warn('Registro de clique enviado em segundo plano.');
       });
     }
+  } catch (err) {
+    console.error('Erro ao enviar lead para a planilha:', err);
   }
 
-  console.log('[LEAD REGISTRADO]:', payload.tipo, '-', payload.botao, 'em', payload.pagina);
+  console.log('[LEAD REGISTRADO NA PLANILHA]:', dados.tipo, '-', dados.botao, 'em', dados.pagina);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -86,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileMenuBtn.setAttribute('aria-expanded', isOpen);
     });
 
-    // Fechar menu mobile ao clicar em um link interno
     const mobileLinks = mobileNavPanel.querySelectorAll('a');
     mobileLinks.forEach(link => {
       link.addEventListener('click', () => {
