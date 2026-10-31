@@ -1,29 +1,78 @@
-COMO CONECTAR O SITE À SUA PLANILHA GOOGLE:
+======================================================================
+COMO ATUALIZAR SUA PLANILHA GOOGLE PARA RECEBER OS CLIQUES DESTE SITE
+======================================================================
 
-1. Acesse o Google Drive (https://drive.google.com) e crie uma nova Planilha Google.
-   Nomeie como: "Leads - Jardineiro Ribeirão Preto".
+Este site já está 100% pronto e configurado para enviar os cliques dos
+botões "WhatsApp" e "Ligue agora" diretamente para a sua planilha do Google.
 
-2. No menu da planilha, clique em:
+Siga estes 4 passos simples na sua planilha:
+
+----------------------------------------------------------------------
+PASSO 1: ABRIR O SCRIPT DA SUA PLANILHA
+----------------------------------------------------------------------
+1. Abra a sua planilha no Google Sheets (a mesma onde você já recebe os
+   cliques dos outros sites).
+2. No menu superior da planilha, clique em:
    Extensões -> Apps Script.
 
-3. Apague o código que aparecer lá e cole todo o código que está no arquivo:
-   apps-script/Codigo.gs
+----------------------------------------------------------------------
+PASSO 2: COLAR O CÓDIGO ATUALIZADO (Code.gs)
+----------------------------------------------------------------------
+1. Na janela do Apps Script, apague todo o código existente.
+2. Copie todo o conteúdo do arquivo "apps-script/Code.gs" deste projeto e cole lá.
+3. Clique no ícone de disquete (Salvar projeto).
 
-4. No canto superior direito da tela do Apps Script, clique no botão azul "Implantar" e depois em "Nova implantação".
+----------------------------------------------------------------------
+PASSO 3: EXECUTAR O SETUP UMA VEZ
+----------------------------------------------------------------------
+1. No topo do editor do Apps Script, ao lado do botão "Depurar", selecione a função "setup".
+2. Clique no botão "Executar".
+3. Se o Google solicitar permissão, clique em "Revisar permissões", selecione sua conta,
+   clique em "Avançado" e depois em "Acessar (não seguro)" para autorizar.
+4. O setup criará as 19 colunas oficiais na aba "Cliques" e a aba "Resumo" com as métricas.
 
-5. Ao lado de "Selecione o tipo", clique no ícone de engrenagem e escolha "App da Web".
+----------------------------------------------------------------------
+PASSO 4: PUBLICAR A NOVA VERSÃO (MANTENDO A MESMA URL)
+----------------------------------------------------------------------
+1. No canto superior direito da tela do Apps Script, clique no botão azul "Implantar"
+   e escolha "Gerenciar implantações".
+2. Na janela que abrir, clique no ícone de lápis (Editar) no canto superior direito.
+3. No campo "Versão", clique no menu e escolha: "Nova versão".
+4. Verifique se o campo "Quem pode acessar" continua marcado como: "Qualquer pessoa".
+5. Clique em "Implantar" e depois em "Concluído".
+   (Dessa forma, a URL do endpoint continua exatamente a mesma:
+   https://script.google.com/macros/s/AKfycbzNOf1W0H8qo7UEY0AGEyLIF3ksLYgj2YELKy9OytgORZ_3Zs6PmRGl_a2p9w-myqdnlg/exec)
+6. Para testar: abra essa URL no seu navegador. Deve aparecer a mensagem "ok v2".
 
-6. Preencha os campos exatamente assim:
-   - Descrição: Webhook de Leads
-   - Executar como: Eu (seu e-mail)
-   - Quem pode acessar: Qualquer pessoa  <--- (IMPORTANTE: marque 'Qualquer pessoa')
+----------------------------------------------------------------------
+COMO MONTAR O RELATÓRIO POR SITE (TABELA DINÂMICA)
+----------------------------------------------------------------------
+Para visualizar os cliques separados por cada site em um só lugar:
+1. Na sua planilha, clique na aba "Cliques".
+2. No menu superior, clique em: Inserir -> Tabela dinâmica.
+3. Escolha "Nova página" e clique em "Criar".
+4. No painel lateral direito:
+   - Em "Linhas", clique em Adicionar e selecione "Site".
+   - Em "Colunas" (opcional), clique em Adicionar e selecione "Botão".
+   - Em "Valores", clique em Adicionar e selecione "Botão" (resumir por: COUNTA / CONT.VALORES).
+Pronto! Você verá uma tabela consolidada mostrando quantos cliques de WhatsApp e Ligação cada site gerou.
 
-7. Clique em "Implantar" e autorize as permissões da sua conta Google.
+----------------------------------------------------------------------
+COMO TROCAR OS NÚMEROS DE TELEFONE E WHATSAPP DO SITE
+----------------------------------------------------------------------
+Quando quiser alterar o WhatsApp ou o Telefone do site, basta abrir o arquivo:
+assets/js/config.js
 
-8. O Google vai te dar uma "URL do app da Web" que termina com /exec.
-   Exemplo: https://script.google.com/macros/s/AKfycbx.../exec
+E alterar apenas os números nos campos:
+- whatsapp: "5516999999999"  (55 + DDD + número, apenas dígitos)
+- telefone: "5516999999999"  (55 + DDD + número, apenas dígitos)
 
-9. Abra o arquivo assets/js/main.js do site e cole essa URL na primeira linha:
-   const GOOGLE_SHEETS_WEBHOOK_URL = 'SUA_URL_AQUI';
+Não é necessário mexer no código HTML, pois o script tracker.js atualiza
+automaticamente todos os botões de todas as páginas do site!
 
-Pronto! A partir desse momento, cada clique nos botões "WhatsApp" e "Ligue agora" em qualquer página do site criará automaticamente uma nova linha na sua planilha com Data, Hora, Botão clicado, Página e Dispositivo.
+----------------------------------------------------------------------
+PRIVACIDADE E SEGURANÇA (LGPD)
+----------------------------------------------------------------------
+Este site NÃO coleta nome, e-mail, CPF, endereço ou qualquer dado pessoal.
+Não utiliza cookies de publicidade nem serviços de rastreamento invasivos.
+Os dados registrados limitam-se ao botão clicado, horário, página e dispositivo.

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#16a34a" />
+      <stop offset="100%" stop-color="#15803d" />
+    </linearGradient>
+  </defs>
+  <!-- Background rounded box -->
+  <rect width="32" height="32" rx="7" fill="url(#grad)" />
+  <!-- Main leaf / sprout -->
+  <path d="M16 6C16 6 18 10 22 11C26 12 26 16 26 16C26 16 22 17 20 20C18 23 16 26 16 26C16 26 16 21 14 18C12 15 8 14 8 14C8 14 12 12 14 9C16 6 16 6 16 6Z" fill="#86efac" />
+  <!-- Sprout central vein -->
+  <path d="M16 26C16 20 18 15 22 11" stroke="#15803d" stroke-width="1.8" stroke-linecap="round" />
+  <!-- Small secondary bud -->
+  <path d="M12 19C10 18 9 16 9 14C11 14 13 15 14 17" fill="#bbf7d0" />
+</svg>
