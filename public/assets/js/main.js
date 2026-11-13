@@ -22,7 +22,7 @@ function registrarClique(tipo, botaoNome) {
     site: SITE_NAME,
     cidade: SITE_CITY,
     servico: SITE_NAME,
-    dominio: window.location.origin || 'https://www.jardineiroribeiraopreto.com.br',
+    dominio: window.location.origin || 'https://jardineiroribeiraopreto.vercel.app',
     tipo: tipo, // 'WhatsApp' ou 'Ligação'
     acao: tipo === 'WhatsApp' ? 'clique_whatsapp' : 'clique_ligacao',
     canal: tipo.toLowerCase(),

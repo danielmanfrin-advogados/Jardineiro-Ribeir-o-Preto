@@ -25,14 +25,14 @@
 - Ipiranga, Vila Tibério, Ribeirânia, Alto da Boa Vista e Vila Virginia
 
 ## Páginas principais
-- Página inicial: https://www.jardineiroribeiraopreto.com.br/
-- Sobre o prestador: https://www.jardineiroribeiraopreto.com.br/sobre/
-- Perguntas frequentes: https://www.jardineiroribeiraopreto.com.br/perguntas-frequentes/
-- Política de privacidade: https://www.jardineiroribeiraopreto.com.br/politica-de-privacidade/
-- Serviço: Corte de grama: https://www.jardineiroribeiraopreto.com.br/servicos/corte-de-grama/
-- Serviço: Limpeza de terrenos: https://www.jardineiroribeiraopreto.com.br/servicos/limpeza-de-terrenos/
-- Serviço: Poda de árvores e arbustos: https://www.jardineiroribeiraopreto.com.br/servicos/poda-de-arvores/
-- Bairro: Jardim Botânico: https://www.jardineiroribeiraopreto.com.br/bairros/jardim-botanico/
-- Bairro: Bonfim Paulista: https://www.jardineiroribeiraopreto.com.br/bairros/bonfim-paulista/
-- Bairro: Nova Aliança: https://www.jardineiroribeiraopreto.com.br/bairros/nova-alianca/
-- Bairro: City Ribeirão: https://www.jardineiroribeiraopreto.com.br/bairros/city-ribeirao/
+- Página inicial: https://jardineiroribeiraopreto.vercel.app/
+- Sobre o prestador: https://jardineiroribeiraopreto.vercel.app/sobre/
+- Perguntas frequentes: https://jardineiroribeiraopreto.vercel.app/perguntas-frequentes/
+- Política de privacidade: https://jardineiroribeiraopreto.vercel.app/politica-de-privacidade/
+- Serviço: Corte de grama: https://jardineiroribeiraopreto.vercel.app/servicos/corte-de-grama/
+- Serviço: Limpeza de terrenos: https://jardineiroribeiraopreto.vercel.app/servicos/limpeza-de-terrenos/
+- Serviço: Poda de árvores e arbustos: https://jardineiroribeiraopreto.vercel.app/servicos/poda-de-arvores/
+- Bairro: Jardim Botânico: https://jardineiroribeiraopreto.vercel.app/bairros/jardim-botanico/
+- Bairro: Bonfim Paulista: https://jardineiroribeiraopreto.vercel.app/bairros/bonfim-paulista/
+- Bairro: Nova Aliança: https://jardineiroribeiraopreto.vercel.app/bairros/nova-alianca/
+- Bairro: City Ribeirão: https://jardineiroribeiraopreto.vercel.app/bairros/city-ribeirao/
